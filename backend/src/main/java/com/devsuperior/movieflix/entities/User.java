@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,10 +29,11 @@ public class User implements Serializable {
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tb_user_role",
-		joinColumns = @JoinColumn(name = "user_id"),
-		inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+
+	@OneToMany(mappedBy = "user")
+	private Set<Review> reviews = new HashSet<>();
 
 	public User() {
 	}
@@ -81,6 +83,10 @@ public class User implements Serializable {
 
 	public boolean hasRole(String roleName) {
 		return roles.stream().anyMatch(role -> roleName.equals(role.getAuthority()));
+	}
+
+	public Set<Review> getReviews() {
+		return Collections.unmodifiableSet(reviews);
 	}
 
 	@Override
