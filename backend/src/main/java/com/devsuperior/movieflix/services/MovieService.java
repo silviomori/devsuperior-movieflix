@@ -26,4 +26,8 @@ public class MovieService {
 		return movieRepository.find(genre, pageable).map(movie -> new MovieDTO(movie));
 	}
 
+	public MovieDTO findById(Long id) {
+		return new MovieDTO(movieRepository.findById(id).orElseThrow());
+	}
+
 }
