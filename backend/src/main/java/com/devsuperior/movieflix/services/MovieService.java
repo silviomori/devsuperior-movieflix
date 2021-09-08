@@ -10,6 +10,7 @@ import com.devsuperior.movieflix.dtos.MovieDTO;
 import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.devsuperior.movieflix.repositories.MovieRepository;
+import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class MovieService {
@@ -27,7 +28,8 @@ public class MovieService {
 	}
 
 	public MovieDTO findById(Long id) {
-		return new MovieDTO(movieRepository.findById(id).orElseThrow());
+		return new MovieDTO(movieRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Movie ID not found: " + id)));
 	}
 
 }
