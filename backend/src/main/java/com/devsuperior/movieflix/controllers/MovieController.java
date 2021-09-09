@@ -1,5 +1,7 @@
 package com.devsuperior.movieflix.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +35,11 @@ public class MovieController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<MovieDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(movieService.findById(id));
+	}
+
+	@GetMapping(value = "/{id}/reviews")
+	public ResponseEntity<List<?>> getReviews(@PathVariable Long id) {
+		return ResponseEntity.ok(movieService.getReviews(id));
 	}
 
 }

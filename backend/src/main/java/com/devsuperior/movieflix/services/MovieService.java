@@ -1,5 +1,7 @@
 package com.devsuperior.movieflix.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,9 @@ public class MovieService {
 	@Autowired
 	private GenreRepository genreRepository;
 
+	@Autowired
+	private ReviewService reviewService;
+
 	@Transactional(readOnly = true)
 	public Page<MovieByGenreDTO> find(Long genreId, Pageable pageable) {
 		Genre genre = genreId == 0 ? null : genreRepository.getOne(genreId);
@@ -32,6 +37,11 @@ public class MovieService {
 	public MovieDTO findById(Long id) {
 		return new MovieDTO(movieRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Movie ID not found: " + id)));
+	}
+
+	@Transactional(readOnly = true)
+	public List<?> getReviews(Long id) {
+		return reviewService.findByMovie(id);
 	}
 
 }

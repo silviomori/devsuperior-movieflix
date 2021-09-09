@@ -25,6 +25,10 @@ public class ReviewDTO implements Serializable {
 		this.user = user;
 	}
 
+	public ReviewDTO(Long id, String text, Long movieId, Long userId, String userName, String userEmail) {
+		this(id, text, movieId, new UserDTO(userId, userName, userEmail));
+	}
+
 	public ReviewDTO(Review review) {
 		this(review.getId(), review.getText(), review.getMovie().getId(), new UserDTO(review.getUser()));
 	}
