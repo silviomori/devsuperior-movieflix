@@ -28,6 +28,7 @@ public class MovieService {
 		return movieRepository.find(genre, pageable);
 	}
 
+	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
 		return new MovieDTO(movieRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Movie ID not found: " + id)));
