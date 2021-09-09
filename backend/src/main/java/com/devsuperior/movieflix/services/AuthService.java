@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.movieflix.entities.User;
 import com.devsuperior.movieflix.repositories.UserRepository;
+import com.devsuperior.movieflix.services.exceptions.ForbiddenException;
 import com.devsuperior.movieflix.services.exceptions.UnauthorizedException;
 
 @Service
@@ -27,6 +28,15 @@ public class AuthService {
 		} catch (Exception e) {
 			throw new UnauthorizedException("Invalid user.");
 		}
+	}
+
+	@Transactional(readOnly = true)
+	public User validateMember() {
+		User user = authenticated();
+		if (!user.hasRole("ROLE_MEMBER")) {
+			throw new ForbiddenException("User is not a member.");
+		}
+		return user;
 	}
 
 }

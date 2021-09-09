@@ -5,36 +5,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.movieflix.dtos.ReviewDTO;
+import com.devsuperior.movieflix.dtos.UserDTO;
 import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.repositories.ReviewRepository;
-import com.devsuperior.movieflix.repositories.UserRepository;
 
 @Service
 public class ReviewService {
 
 	@Autowired
 	private ReviewRepository reviewRepository;
-	
+
 	@Autowired
 	private MovieRepository movieRepository;
-	
+
 	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
-	private UserService userService;
-	
+	private AuthService authService;
+
 	@Transactional
 	public ReviewDTO insert(ReviewDTO dto) {
-		dto.setUser(userService.getUserProfile());
 		Review review = new Review();
+		review.setUser(authService.validateMember());
 		review.setMovie(movieRepository.getOne(dto.getMovieId()));
-		review.setUser(userRepository.getOne(dto.getUser().getId()));
 		review.setText(dto.getText());
 		review = reviewRepository.saveAndFlush(review);
+
 		dto.setId(review.getId());
+		dto.setUser(new UserDTO(review.getUser()));
 		return dto;
 	}
-	
+
 }
