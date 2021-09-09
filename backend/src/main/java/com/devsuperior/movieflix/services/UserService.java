@@ -1,7 +1,6 @@
 package com.devsuperior.movieflix.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +16,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private AuthService authService;
 
 	@Transactional(readOnly = true)
 	public UserDTO getUser(Long id) {
@@ -26,9 +28,7 @@ public class UserService implements UserDetailsService {
 
 	@Transactional(readOnly = true)
 	public UserDTO getUserProfile() {
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		User user = repository.findByEmail(username);
-		return new UserDTO(user);
+		return new UserDTO(authService.authenticated());
 	}
 
 	@Override
