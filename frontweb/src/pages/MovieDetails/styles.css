@@ -1,0 +1,28 @@
+.movie-details-container {
+  padding: 10px;
+}
+
+.movie-details-container h1 {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.015em;
+  margin-bottom: 15px;
+}
+
+.movie-reviews-container {
+  padding: 10px;
+  margin-top: 20px;
+}
+
+@media (min-width: 1200px) {
+  .movie-details-container h1 {
+    font-size: 36px;
+    line-height: 65px;
+  }
+
+  .movie-reviews-container {
+    padding: 20px;
+    margin-top: 25px;
+  }
+}

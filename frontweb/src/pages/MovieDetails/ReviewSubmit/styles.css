@@ -1,0 +1,32 @@
+.submit-review-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+.submit-review-card textarea {
+  text-align: justify;
+  line-height: 22px;
+  min-height: 80px;
+  margin-bottom: 15px;
+}
+
+.submit-review-card button {
+  font-weight: bold;
+  width: 100%;
+  max-width: 350px;
+}
+
+@media (min-width: 576px) {
+  .submit-review-card textarea {
+    min-height: 60px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .submit-review-card {
+    padding: 20px;
+  }
+}
