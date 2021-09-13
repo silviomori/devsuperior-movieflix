@@ -35,7 +35,7 @@ const Navbar = () => {
         {authContextData.authenticated ? (
           <div className="navbar-signout-container">
             <button type="button" className="btn" onClick={(e) => doLogout(e)}>
-              Sing out
+              Sign out
             </button>
           </div>
         ) : null}

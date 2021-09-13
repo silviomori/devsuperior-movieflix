@@ -1,22 +1,25 @@
 import Navbar from 'components/Navbar';
+import PrivateRoute from 'components/PrivateRoute';
 import Auth from 'pages/Auth';
 import Catalog from 'pages/Catalog';
 import MovieDetails from 'pages/MovieDetails';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 
 const Routes = () => (
   <BrowserRouter>
     <Navbar />
     <Switch>
-      <Route path="/" exact>
+      <PrivateRoute path="/" redirectTo="/movies" exact
+        allowAuthenticated={false}
+      >
         <Auth />
-      </Route>
-      <Route path="/movies" exact>
+      </PrivateRoute>
+      <PrivateRoute path="/movies" exact>
         <Catalog />
-      </Route>
-      <Route path="/movies/:movieId" exact>
+      </PrivateRoute>
+      <PrivateRoute path="/movies/:movieId">
         <MovieDetails />
-      </Route>
+      </PrivateRoute>
     </Switch>
   </BrowserRouter>
 );
