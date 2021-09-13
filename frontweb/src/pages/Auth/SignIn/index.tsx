@@ -1,6 +1,8 @@
+import { AuthContext } from 'AuthContext';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { requestBackendLogin } from 'util/auth';
+import { getTokenData, requestBackendLogin } from 'util/auth';
 import { saveAuthData } from 'util/storage';
 import './styles.css';
 
@@ -11,6 +13,7 @@ type FormData = {
 
 const SignIn = () => {
   const history = useHistory();
+  const { setAuthContextData } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -20,6 +23,7 @@ const SignIn = () => {
     requestBackendLogin(formData)
       .then((response) => {
         saveAuthData(response.data);
+        setAuthContextData({ authenticated: true, tokenData: getTokenData() });
         history.push('/movies');
       })
       .catch((error) => console.log('error: ', error));
