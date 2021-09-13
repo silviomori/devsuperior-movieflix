@@ -16,3 +16,8 @@ export const saveAuthData = (obj: LoginResponse) => {
 export const removeAuthData = () => {
   localStorage.removeItem(tokenKey);
 };
+
+export const getAuthData = () => {
+  const strAuthData = localStorage.getItem(tokenKey) ?? '{}';
+  return JSON.parse(strAuthData) as LoginResponse;
+};
