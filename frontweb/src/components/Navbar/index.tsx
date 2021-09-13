@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './styles.css';
 
 const Navbar = () => {
@@ -5,12 +6,14 @@ const Navbar = () => {
     <div className="bg-primary">
       <div className="container navbar-container">
         <div>
-          <a href="#link">
+          <Link to="/movies">
             <h1>MovieFlix</h1>
-          </a>
+          </Link>
         </div>
         <div className="navbar-signout-container">
-          <button className="btn">Sing out</button>
+          <Link to="/">
+            <button className="btn">Sing out</button>
+          </Link>
         </div>
       </div>
     </div>

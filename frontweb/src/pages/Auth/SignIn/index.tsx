@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './styles.css';
 
 const SignIn = () => {
@@ -25,7 +26,9 @@ const SignIn = () => {
           Esqueci a senha
         </a>
         <div className="login-submit">
-          <button className="btn btn-primary">Sign In</button>
+          <Link to="/movies">
+            <button className="btn btn-primary">Sign In</button>
+          </Link>
         </div>
         <div className="signup-container">
           <span className="not-registered">New to MovieFlix?</span>

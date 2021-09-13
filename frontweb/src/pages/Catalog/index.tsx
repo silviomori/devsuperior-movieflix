@@ -1,5 +1,6 @@
 import './styles.css';
 import MovieCard from 'components/MovieCard';
+import { Link } from 'react-router-dom';
 
 const Catalog = () => {
   return (
@@ -9,10 +10,14 @@ const Catalog = () => {
       </div>
       <div className="row">
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <MovieCard title={'Movie 1'} />
+          <Link to="/movies/1">
+            <MovieCard title={'Movie 1'} />
+          </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <MovieCard title={'Movie 2'} />
+          <Link to="/movies/2">
+            <MovieCard title={'Movie 2'} />
+          </Link>
         </div>
       </div>
     </div>

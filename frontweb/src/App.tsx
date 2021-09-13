@@ -1,15 +1,9 @@
 import './assets/styles/custom.scss';
 import './App.css';
-import Navbar from 'components/Navbar';
-import MovieDetails from 'pages/MovieDetails';
+import Routes from 'Routes';
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <MovieDetails title="Movie 1" />
-    </>
-  );
+  return <Routes />;
 }
 
 export default App;
