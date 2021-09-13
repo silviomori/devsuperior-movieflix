@@ -1,8 +1,13 @@
 $theme-colors: (
-  'primary': #FFC700,
+  'primary': #ffc700,
 );
 
 $body-bg: #525252;
-$body-color: #FFF;
+$body-color: #fff;
 
 @import '~bootstrap/scss/bootstrap.scss';
+
+a, a:hover {
+  text-decoration: none;
+  color: unset;
+}

@@ -1,0 +1,30 @@
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.navbar-container h1 {
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.015em;
+  color: #000;
+}
+
+.navbar-signout-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar-signout-container button {
+  width: 100px;
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 19px;
+  letter-spacing: -0.015em;
+  text-transform: initial;
+  border: 1px solid #000000;
+  border-radius: 10px;
+}
