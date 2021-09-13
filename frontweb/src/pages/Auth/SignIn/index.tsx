@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { requestBackendLogin } from 'util/auth';
+import { saveAuthData } from 'util/storage';
 import './styles.css';
 
 type FormData = {
@@ -18,6 +19,7 @@ const SignIn = () => {
   const onSubmit = (formData: FormData) => {
     requestBackendLogin(formData)
       .then((response) => {
+        saveAuthData(response.data);
         history.push('/movies');
       })
       .catch((error) => console.log('error: ', error));

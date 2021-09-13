@@ -1,7 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { removeAuthData } from 'util/storage';
 import './styles.css';
 
 const Navbar = () => {
+  const history = useHistory();
+  const doLogout = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    removeAuthData();
+    history.replace('/');
+  };
   return (
     <div className="bg-primary">
       <div className="container navbar-container">
@@ -11,9 +18,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-signout-container">
-          <Link to="/">
-            <button className="btn">Sing out</button>
-          </Link>
+          <button type="button" className="btn" onClick={(e) => doLogout(e)}>
+            Sing out
+          </button>
         </div>
       </div>
     </div>
