@@ -4,6 +4,7 @@ $theme-colors: (
 
 $body-bg: #525252;
 $body-color: #fff;
+$form-feedback-invalid-color: rgb(215, 0, 0);
 
 @import '~bootstrap/scss/bootstrap.scss';
 
