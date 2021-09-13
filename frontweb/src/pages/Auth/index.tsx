@@ -1,5 +1,6 @@
 import './styles.css';
 import { ReactComponent as MovieFlixInitialSVG } from 'assets/images/movieflix-initial.svg';
+import SignIn from './SignIn';
 
 const Auth = () => {
   return (
@@ -11,7 +12,9 @@ const Auth = () => {
         </div>
         <MovieFlixInitialSVG />
       </div>
-      <div className="auth-form-container">Sign-In Card</div>
+      <div className="auth-form-container">
+        <SignIn />
+      </div>
     </div>
   );
 };
