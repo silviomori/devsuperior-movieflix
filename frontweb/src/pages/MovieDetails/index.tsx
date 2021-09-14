@@ -3,6 +3,11 @@ import ReviewDetails from './ReviewDetails';
 import ReviewSubmit from './ReviewSubmit';
 import { useParams } from 'react-router';
 import { hasAnyRoles } from 'util/auth';
+import { useEffect, useState } from 'react';
+import { Review } from 'types/review';
+import { Movie } from 'types/movie';
+import { AxiosRequestConfig } from 'axios';
+import { requestBackend } from 'util/requests';
 
 type UrlParams = {
   movieId: string;
@@ -11,13 +16,44 @@ type UrlParams = {
 const MovieDetails = () => {
   const { movieId } = useParams<UrlParams>();
 
+  const [movie, setMovie] = useState<Movie>();
+  useEffect(() => {
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: `/movies/${movieId}`,
+      withCredentials: true,
+    };
+    requestBackend(params).then((response) => {
+      setMovie(response.data);
+    });
+  }, [movieId]);
+
+  const [reviews, setReviews] = useState<Review[]>();
+  useEffect(() => {
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: `/movies/${movieId}/reviews`,
+      withCredentials: true,
+    };
+    requestBackend(params).then((response) => {
+      setReviews(response.data);
+    });
+  }, [movieId]);
+
   return (
     <div className="container movie-details-container">
-      <h1>Details of Movie {movieId}</h1>
+      <h1>Reviews for {movie?.title}</h1>
       {hasAnyRoles(['ROLE_MEMBER']) && <ReviewSubmit />}
       <div className="base-card movie-reviews-container">
-        <ReviewDetails />
-        <ReviewDetails />
+        {reviews ? (
+          reviews.length === 0 ? (
+            <h6>There is no review for this movie yet</h6>
+          ) : (
+            reviews.map((review) => {
+              return <ReviewDetails review={review} />;
+            })
+          )
+        ) : null}
       </div>
     </div>
   );
