@@ -28,6 +28,7 @@ const MovieDetails = () => {
     });
   }, [movieId]);
 
+  const [refresh, setRefresh] = useState<boolean>(true);
   const [reviews, setReviews] = useState<Review[]>();
   useEffect(() => {
     const params: AxiosRequestConfig = {
@@ -38,19 +39,20 @@ const MovieDetails = () => {
     requestBackend(params).then((response) => {
       setReviews(response.data);
     });
-  }, [movieId]);
+    setRefresh(false);
+  }, [movieId, refresh]);
 
   return (
     <div className="container movie-details-container">
       <h1>Reviews for {movie?.title}</h1>
-      {hasAnyRoles(['ROLE_MEMBER']) && <ReviewSubmit />}
+      {hasAnyRoles(['ROLE_MEMBER']) && <ReviewSubmit callback={setRefresh} />}
       <div className="base-card movie-reviews-container">
         {reviews ? (
           reviews.length === 0 ? (
             <h6>There is no review for this movie yet</h6>
           ) : (
             reviews.map((review) => {
-              return <ReviewDetails review={review} />;
+              return <ReviewDetails review={review} key={review.id}/>;
             })
           )
         ) : null}
