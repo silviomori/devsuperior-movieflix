@@ -68,7 +68,7 @@ const SignIn = () => {
           </div>
         </div>
         <a href="/admin/auth/recover" className="login-link-recover">
-          Esqueci a senha
+          Forgot your password?
         </a>
         <div className="login-submit">
           <button className="btn btn-primary">Sign In</button>
