@@ -1,13 +1,9 @@
 .movie-details-container {
-  padding: 10px;
+  padding: 20px 10px;
 }
 
-.movie-details-container h1 {
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 33px;
-  letter-spacing: -0.015em;
-  margin-bottom: 15px;
+.movie-details-movie-card-container {
+  margin-bottom: 20px;
 }
 
 .movie-reviews-container {
@@ -22,15 +18,12 @@
 }
 
 @media (min-width: 768px) {
+  .movie-details-movie-card-container {
+    margin-bottom: 40px;
+  }
+
   .movie-reviews-container {
     padding: 27px 40px;
     margin-top: 40px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .movie-details-container h1 {
-    font-size: 36px;
-    line-height: 65px;
   }
 }

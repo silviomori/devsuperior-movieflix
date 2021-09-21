@@ -8,6 +8,7 @@ import { Review } from 'types/review';
 import { Movie } from 'types/movie';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
+import MovieCard from 'components/MovieCard';
 
 type UrlParams = {
   movieId: string;
@@ -44,7 +45,11 @@ const MovieDetails = () => {
 
   return (
     <div className="container movie-details-container">
-      <h1>Reviews for {movie?.title}</h1>
+      {movie && (
+        <div className="movie-details-movie-card-container">
+          <MovieCard movie={movie} details />
+        </div>
+      )}
       {hasAnyRoles(['ROLE_MEMBER']) && <ReviewSubmit callback={setRefresh} />}
       <div className="base-card movie-reviews-container">
         {reviews ? (
@@ -52,7 +57,7 @@ const MovieDetails = () => {
             <h6>There is no review for this movie yet</h6>
           ) : (
             reviews.map((review) => {
-              return <ReviewDetails review={review} key={review.id}/>;
+              return <ReviewDetails review={review} key={review.id} />;
             })
           )
         ) : null}
