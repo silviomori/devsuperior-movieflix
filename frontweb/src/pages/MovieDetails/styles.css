@@ -11,18 +11,26 @@
 }
 
 .movie-reviews-container {
-  padding: 10px;
+  padding: 17px 10px;
   margin-top: 20px;
+}
+
+@media (min-width: 576px) {
+  .movie-reviews-container {
+    padding: 17px 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .movie-reviews-container {
+    padding: 27px 40px;
+    margin-top: 40px;
+  }
 }
 
 @media (min-width: 1200px) {
   .movie-details-container h1 {
     font-size: 36px;
     line-height: 65px;
-  }
-
-  .movie-reviews-container {
-    padding: 20px;
-    margin-top: 25px;
   }
 }

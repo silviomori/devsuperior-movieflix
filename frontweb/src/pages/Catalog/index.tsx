@@ -34,7 +34,7 @@ const Catalog = () => {
       <div className="row">
         {page?.content.map((movie) => {
           return (
-            <div className="col-sm-6 col-lg-4 col-xl-3" key={movie.id}>
+            <div className="col-sm-6 col-xl-3" key={movie.id}>
               <Link to={'/movies/' + movie.id}>
                 <MovieCard movie={movie} />
               </Link>

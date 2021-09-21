@@ -10,23 +10,44 @@
   text-align: justify;
   line-height: 22px;
   min-height: 80px;
-  margin-bottom: 15px;
+  margin-bottom: 17px;
 }
 
 .submit-review-card button {
-  font-weight: bold;
   width: 100%;
-  max-width: 350px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.015em;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 @media (min-width: 576px) {
+  .submit-review-card {
+    padding: 20px;
+  }
+
   .submit-review-card textarea {
     min-height: 60px;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .submit-review-card {
-    padding: 20px;
+    padding: 40px;
+  }
+  .submit-review-card textarea {
+    margin-bottom: 20px;
   }
 }
+
+@media (min-width: 992px) {
+  .submit-review-card textarea {
+    margin-bottom: 25px;
+  }
+  .submit-review-card button {
+    width: 400px;
+  }
+}
+
