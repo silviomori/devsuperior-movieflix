@@ -3,7 +3,7 @@ import ReviewDetails from './ReviewDetails';
 import ReviewSubmit from './ReviewSubmit';
 import { useParams } from 'react-router';
 import { hasAnyRoles } from 'util/auth';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Review } from 'types/review';
 import { Movie } from 'types/movie';
 import { AxiosRequestConfig } from 'axios';
@@ -29,9 +29,8 @@ const MovieDetails = () => {
     });
   }, [movieId]);
 
-  const [refresh, setRefresh] = useState<boolean>(true);
   const [reviews, setReviews] = useState<Review[]>();
-  useEffect(() => {
+  const getReviews = useCallback(() => {
     const params: AxiosRequestConfig = {
       method: 'GET',
       url: `/movies/${movieId}/reviews`,
@@ -40,8 +39,11 @@ const MovieDetails = () => {
     requestBackend(params).then((response) => {
       setReviews(response.data);
     });
-    setRefresh(false);
-  }, [movieId, refresh]);
+  }, [movieId]);
+
+  useEffect(() => {
+    getReviews();
+  }, [getReviews]);
 
   return (
     <div className="container movie-details-container">
@@ -50,7 +52,9 @@ const MovieDetails = () => {
           <MovieCard movie={movie} details />
         </div>
       )}
-      {hasAnyRoles(['ROLE_MEMBER']) && <ReviewSubmit callback={setRefresh} />}
+      {hasAnyRoles(['ROLE_MEMBER']) && (
+        <ReviewSubmit onNewReview={getReviews} />
+      )}
       <div className="base-card movie-reviews-container">
         {reviews ? (
           reviews.length === 0 ? (

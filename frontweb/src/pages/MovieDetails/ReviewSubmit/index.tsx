@@ -6,14 +6,14 @@ import { requestBackend } from 'util/requests';
 import './styles.css';
 
 type Props = {
-  callback: Function;
+  onNewReview: () => void;
 };
 
 type UrlParams = {
   movieId: string;
 };
 
-const ReviewSubmit = ({ callback }: Props) => {
+const ReviewSubmit = ({ onNewReview }: Props) => {
   const { movieId } = useParams<UrlParams>();
 
   const { register, handleSubmit, reset } = useForm<Review>();
@@ -26,11 +26,11 @@ const ReviewSubmit = ({ callback }: Props) => {
       data: formData,
     };
     requestBackend(params)
-      .then((response) => {
-        reset({text: ''})
-        callback(true);
+      .then(() => {
+        reset({ text: '' });
+        onNewReview();
       })
-      .catch((error) => console.log('error: ', error))
+      .catch((error) => console.log('error: ', error));
   };
 
   return (
