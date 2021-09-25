@@ -8,6 +8,7 @@ import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import SearchBar from './SearchBar';
 import { Genre } from 'types/genre';
+import Pagination from './Pagination';
 
 type ComponentOptions = {
   genre: Genre | null;
@@ -60,6 +61,9 @@ const Catalog = () => {
             </div>
           );
         })}
+      </div>
+      <div>
+        <Pagination />
       </div>
     </div>
   );
