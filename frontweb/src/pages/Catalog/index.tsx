@@ -12,10 +12,14 @@ import Pagination from './Pagination';
 
 type ComponentOptions = {
   genre: Genre | null;
+  activePage: number;
 };
 
 const Catalog = () => {
-  const [options, setOptions] = useState<ComponentOptions>();
+  const [options, setOptions] = useState<ComponentOptions>({
+    genre: null,
+    activePage: 0,
+  });
   const [page, setPage] = useState<SpringPage<Movie>>();
 
   const getMoviesPage = useCallback(() => {
@@ -26,8 +30,8 @@ const Catalog = () => {
       }`,
       withCredentials: true,
       params: {
-        page: 0,
-        size: 12,
+        page: `${options ? (options.activePage ? options.activePage : 0) : 0}`,
+        size: 4,
         sort: 'id,ASC',
       },
     };
@@ -41,8 +45,14 @@ const Catalog = () => {
   }, [getMoviesPage]);
 
   const handleGenreChange = (genre: Genre | null) => {
+    setOptions({ genre: genre, activePage: 0 });
+  };
+
+  const handlePageChange = (pageNumber: number) => {
+    console.log('handlePageChange: ', pageNumber);
     setOptions({
-      genre: genre,
+      genre: options ? options.genre : null,
+      activePage: pageNumber,
     });
   };
 
@@ -63,7 +73,12 @@ const Catalog = () => {
         })}
       </div>
       <div>
-        <Pagination />
+        <Pagination
+          pageCount={page ? page.totalPages : 0}
+          range={3}
+          onChange={handlePageChange}
+          forcePage={page?.number}
+        />
       </div>
     </div>
   );

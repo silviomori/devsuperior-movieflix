@@ -23,6 +23,11 @@
   background-color: var(--bs-primary);
 }
 
+.pagination-arrow-container {
+  display: flex;
+  align-items: center;
+}
+
 .arrow-previous {
   color: var(--bs-primary);
   transform: rotate(-180deg);
