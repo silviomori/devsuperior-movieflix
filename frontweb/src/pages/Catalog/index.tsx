@@ -6,6 +6,7 @@ import { SpringPage } from 'types/vendor/spring';
 import { Movie } from 'types/movie';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
+import SearchBar from './SearchBar';
 
 const Catalog = () => {
   const [page, setPage] = useState<SpringPage<Movie>>();
@@ -28,8 +29,8 @@ const Catalog = () => {
 
   return (
     <div className="my-4 container catalog-container">
-      <div className="row catalog-title-container">
-        <h1>Movie catalog</h1>
+      <div className="catalog-searchbar-container">
+        <SearchBar />
       </div>
       <div className="row">
         {page?.content.map((movie) => {

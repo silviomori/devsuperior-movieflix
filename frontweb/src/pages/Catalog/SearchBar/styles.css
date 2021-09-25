@@ -1,0 +1,52 @@
+.searchbar-card {
+  height: 60px;
+}
+
+.searchbar-card .form-control {
+  width: 260px;
+  background-color: transparent;
+  border: none;
+  padding: 5px 20px;
+}
+
+.searchbar-select__control {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.015em;
+  color: #fff !important;
+  background-color: transparent !important;
+  height: 50px;
+  padding-left: 12px;
+}
+
+.searchbar-select__placeholder {
+  color: #bebdbd !important;
+}
+
+.searchbar-select__single-value {
+  color: #fff !important;
+}
+
+.searchbar-select__indicator {
+  color: #bebdbd !important;
+}
+.searchbar-select__indicator-separator {
+  display: none;
+}
+
+.searchbar-select__menu {
+  background-color: #525252 !important;
+}
+
+.searchbar-select__option {
+  font-size: 24px;
+  line-height: 22px;
+  letter-spacing: -0.015em;
+  color: #fff !important;
+  background-color: transparent !important;
+  height: 50px;
+}
+
+.searchbar-select__option:hover {
+  background-color: #6c6c6c !important;
+}
