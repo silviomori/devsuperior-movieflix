@@ -1,12 +1,21 @@
 import './styles.css';
-import Select, { StylesConfig } from 'react-select';
+import Select from 'react-select';
 import { Genre } from 'types/genre';
+import { useEffect, useState } from 'react';
+import { requestBackend } from 'util/requests';
+import { AxiosRequestConfig } from 'axios';
 
 const SearchBar = () => {
-  const selectGenres: Genre[] = [
-    { id: '1', name: 'Comédia' },
-    { id: '2', name: 'Drama' },
-  ];
+  const [selectGenres, setSelectGenres] = useState<Genre[]>();
+  useEffect(() => {
+    const config: AxiosRequestConfig = {
+      method: 'GET',
+      url: '/genres',
+      withCredentials: true,
+    };
+    requestBackend(config).then((response) => setSelectGenres(response.data));
+  }, []);
+
   return (
     <div className="base-card searchbar-card">
       <Select
