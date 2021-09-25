@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router';
 import { Review } from 'types/review';
 import { requestBackend } from 'util/requests';
+import { toast } from 'react-toastify';
 import './styles.css';
 
 type Props = {
@@ -18,6 +19,15 @@ const ReviewSubmit = ({ onNewReview }: Props) => {
 
   const { register, handleSubmit, reset } = useForm<Review>();
   const onSubmit = (formData: Review) => {
+    formData = { ...formData, text: formData.text.trim() };
+    if (formData.text.trim().length === 0) {
+      toast.error('It is not allowed an empty review.');
+      return;
+    }
+    if (formData.text.trim().length > 255) {
+      toast.error('The maximum length for a review is 255 characters.');
+      return;
+    }
     formData.movieId = movieId;
     const params: AxiosRequestConfig = {
       method: 'POST',
@@ -28,9 +38,10 @@ const ReviewSubmit = ({ onNewReview }: Props) => {
     requestBackend(params)
       .then(() => {
         reset({ text: '' });
+        toast.success('Review saved.');
         onNewReview();
       })
-      .catch((error) => console.log('error: ', error));
+      .catch((error) => toast.error('Unexpected error while saving review.'));
   };
 
   return (
