@@ -5,7 +5,11 @@ import { useEffect, useState } from 'react';
 import { requestBackend } from 'util/requests';
 import { AxiosRequestConfig } from 'axios';
 
-const SearchBar = () => {
+type Props = {
+  onSelect: (genre: Genre | null) => void;
+};
+
+const SearchBar = ({ onSelect }: Props) => {
   const [selectGenres, setSelectGenres] = useState<Genre[]>();
   useEffect(() => {
     const config: AxiosRequestConfig = {
@@ -25,6 +29,7 @@ const SearchBar = () => {
         isClearable
         getOptionLabel={(genre: Genre) => genre.name}
         getOptionValue={(genre: Genre) => genre.id}
+        onChange={(value) => {onSelect(value)}}
       />
     </div>
   );

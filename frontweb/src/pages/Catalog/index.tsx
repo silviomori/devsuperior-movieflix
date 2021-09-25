@@ -1,20 +1,28 @@
 import './styles.css';
 import MovieCard from 'components/MovieCard';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { SpringPage } from 'types/vendor/spring';
 import { Movie } from 'types/movie';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import SearchBar from './SearchBar';
+import { Genre } from 'types/genre';
+
+type ComponentOptions = {
+  genre: Genre | null;
+};
 
 const Catalog = () => {
+  const [options, setOptions] = useState<ComponentOptions>();
   const [page, setPage] = useState<SpringPage<Movie>>();
 
-  useEffect(() => {
+  const getMoviesPage = useCallback(() => {
     const params: AxiosRequestConfig = {
       method: 'GET',
-      url: '/movies',
+      url: `/movies?genreId=${
+        options ? (options.genre ? options.genre.id : '0') : '0'
+      }`,
       withCredentials: true,
       params: {
         page: 0,
@@ -25,12 +33,22 @@ const Catalog = () => {
     requestBackend(params).then((response) => {
       setPage(response.data);
     });
-  }, []);
+  }, [options]);
+
+  useEffect(() => {
+    getMoviesPage();
+  }, [getMoviesPage]);
+
+  const handleGenreChange = (genre: Genre | null) => {
+    setOptions({
+      genre: genre,
+    });
+  };
 
   return (
     <div className="my-4 container catalog-container">
       <div className="catalog-searchbar-container">
-        <SearchBar />
+        <SearchBar onSelect={handleGenreChange} />
       </div>
       <div className="row">
         {page?.content.map((movie) => {
